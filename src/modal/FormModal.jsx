@@ -5,65 +5,53 @@ const FormModal = ({ isOpen, onClose, selectedPackage }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [responseMessage, setResponseMessage] = useState("");
 
-    const scriptURL = 
-    "https://script.google.com/macros/s/AKfycbwpbeG3FgWyVGh0TSjv0MS0GQ9Eo3P0r8JgQJ6i30fmU_4VR_blCLhHPF7do_Ovwl03BA/exec"
-    ;
-
+    // Handle form input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
+    // Handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+      e.preventDefault();
+      setIsSubmitting(true);
+      setResponseMessage("");
     
-        console.log("Submitting to script:", scriptURL);
-        console.log("Form Data:", formData);
-        console.log("Selected Package:", selectedPackage);
+      const data = {
+        name: formData.name || "Anonymous",
+        email: formData.email || "No email provided",
+        package: selectedPackage?.name || "Unknown Package",
+      };
     
-        const submissionData = new URLSearchParams({
-            name: formData.name || "Anonymous",
-            email: formData.email || "No email provided",
-            package: selectedPackage?.name || "Unknown Package",
-        });
+      try {
+        const queryParams = new URLSearchParams(data).toString();
+        const url = `https://proxy-production-eaa8.up.railway.app/proxy?${queryParams}`;
+        ; // Use the backend proxy
     
-        try {
-            const response = await fetch(scriptURL, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded', // Set the content type
-                },
-                body: submissionData,
-            });
+        const response = await fetch(url, { method: "GET" });
     
-            console.log("Response Status:", response.status);
-            console.log("Response Headers:", response.headers);
+        console.log("Response Status:", response.status);
     
-            // Check if the response is OK (status in the range 200-299)
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+        const textResponse = await response.text();
+        console.log("Raw Response:", textResponse);
     
-            const result = await response.json();
-            console.log("Response Body:", result);
+        if (response.ok) {
+          setResponseMessage("✅ Form submitted successfully!");
+          setFormData({ name: "", email: "" });
     
-            if (result.success) {
-                setResponseMessage("Form submitted successfully!");
-                setFormData({ name: "", email: "" }); // Reset the form
-                setTimeout(() => {
-                    setResponseMessage("");
-                    onClose();
-                }, 2000); // Close the modal after 2 seconds
-            } else {
-                setResponseMessage("Submission failed. Please try again.");
-            }
-        } catch (error) {
-            console.error("Error submitting form:", error);
-            setResponseMessage("An error occurred. Please try again.");
-        } finally {
-            setIsSubmitting(false);
+          setTimeout(() => {
+            setResponseMessage("");
+            onClose();
+          }, 2000);
+        } else {
+          setResponseMessage("❌ Submission failed. Try again.");
         }
+      } catch (error) {
+        console.error("Network Error:", error);
+        setResponseMessage("❌ Network error. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     };
     
 

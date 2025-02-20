@@ -64,16 +64,17 @@ const ServicePackages = () => {
 
     return (
         <motion.div
-            className="py-52 px-6 sm:px-10 md:px-16 lg:px-20 bg-gradient-to-br from-[#281245] via-[#0e1534] to-[#131528]"
+            className="py-20 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-20 bg-gradient-to-b from-[#1a012c] to-[#000000]"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
             transition={{ duration: 1 }}
+            id="packages"
         >
-            <div className="container text-center mb-16 px-6 lg:px-12">
-                {/* Heading */}
+            {/* Heading Section */}
+            <div className="container text-center mb-12 sm:mb-16 px-4 sm:px-6 lg:px-8">
                 <motion.h2
-                    className="text-5xl font-bold text-center bg-gradient-to-r from-[#13FFAA] via-[#1E67C6] to-[#CE84CF] text-transparent bg-clip-text"
+                    className="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12 bg-gradient-to-r from-[#13FFAA] via-[#1E67C6] to-[#CE84CF] text-transparent bg-clip-text"
                     initial={{ opacity: 0, y: -50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
@@ -81,17 +82,17 @@ const ServicePackages = () => {
                 >
                     Service Packages
                 </motion.h2>
-                <p className="text-lg mt-6 lg:mt-8 text-center text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mx-auto">
                     Explore our service offerings designed to cater to your needs. Whether you're looking for small-scale solutions with our Standard Package or fully customized projects through our Custom Request Package, we've got you covered.
                 </p>
             </div>
 
-            {/* Packages */}
-            <div className="flex flex-wrap justify-center gap-10">
+            {/* Packages Grid */}
+            <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-6 lg:px-8">
                 {packages.map((pkg, index) => (
                     <motion.div
                         key={index}
-                        className={`relative flex flex-col p-6 bg-gradient-to-br from-white/10 via-[#1E293B]/30 to-[#0F172A]/50 backdrop-blur-lg rounded-xl shadow-lg w-full sm:w-80 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl ${
+                        className={`relative flex flex-col p-5 sm:p-6 bg-gradient-to-br from-white/10 via-[#1E293B]/30 to-[#0F172A]/50 backdrop-blur-lg rounded-xl shadow-lg w-full sm:w-80 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl ${
                             pkg.recommended ? "border border-[#13FFAA]" : ""
                         }`}
                         initial={{ opacity: 0, y: 25 }}
@@ -140,7 +141,7 @@ const ServicePackages = () => {
                         {/* Action Button */}
                         <button
                             onClick={() => openModal(pkg)}
-                            className="w-full px-6 py-3 bg-gradient-to-r from-[#13FFAA] to-[#1E67C6] text-black font-medium rounded-lg hover:from-[#11E19E] hover:to-[#155DA1] transition-all"
+                            className="w-full px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#13FFAA] to-[#1E67C6] text-black font-medium rounded-lg hover:from-[#11E19E] hover:to-[#155DA1] transition-all"
                         >
                             {pkg.buttonText}
                         </button>
@@ -149,7 +150,7 @@ const ServicePackages = () => {
             </div>
 
             {/* Form Modal */}
-           <FormModal isOpen={isModalOpen} onClose={closeModal} selectedPackage={selectedPackage} />
+            <FormModal isOpen={isModalOpen} onClose={closeModal} selectedPackage={selectedPackage} />
         </motion.div>
     );
 };

@@ -10,7 +10,9 @@ const services = [
 const ServiceList = () => {
     return (
         <motion.div
-            className="py-52 px-6 sm:px-10 md:px-16 lg:px-20 bg-gradient-to-br from-[#061d45] to-[#33085e]"
+            className="bg-gradient-to-br from-[#000000] to-[#1a012c] 
+            py-12 md:py-10 lg:py-32 
+            px-4 sm:px-8 md:px-16 lg:px-24 xl:px-56"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false }}
@@ -18,7 +20,7 @@ const ServiceList = () => {
             id="services"
         >
             {/* Heading */}
-            <div className="container text-center mb-16 px-6 lg:px-12">
+            <div className="container text-center mb-20 px-6 lg:px-40">
                 <motion.h2
                     className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-[#13FFAA] via-[#1E67C6] to-[#CE84CF] text-transparent bg-clip-text"
                     initial={{ opacity: 0, y: -50 }}
@@ -33,11 +35,11 @@ const ServiceList = () => {
                 </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center">
                 {services.map((service, index) => (
                     <motion.div
                         key={index}
-                        className="group relative flex flex-col items-center p-6 bg-gradient-to-br from-[#1e293b] to-[#0f172a] rounded-2xl shadow-lg transition-transform duration-300 w-full sm:w-80 hover:scale-105 hover:shadow-[0_4px_20px_rgba(19,255,170,0.5)]"
+                        className="group relative h-full w-full max-w-[350px] flex flex-col items-center p-6 bg-gradient-to-br from-[#1e293b] to-[#0f172a] rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-[0_4px_20px_rgba(19,255,170,0.5)]"
                         initial={{ opacity: 0, y: 25 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false }}

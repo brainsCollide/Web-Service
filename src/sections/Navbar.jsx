@@ -4,9 +4,9 @@ import { Link } from "react-scroll";
 import { FaHome, FaBullhorn, FaCogs, FaProjectDiagram } from "react-icons/fa";
 
 const navLinks = [
-    { id: "hero", label: "Home", icon: <FaHome /> },
-    { id: "cta", label: "CTA", icon: <FaBullhorn /> },
+    { id: "cta", label: "Home", icon: <FaHome /> },
     { id: "services", label: "Services", icon: <FaCogs /> },
+    { id: "packages", label: "Packages", icon: <FaBullhorn /> },
     { id: "projects", label: "Projects", icon: <FaProjectDiagram /> },
 ];
 
@@ -63,7 +63,7 @@ const Navbar = () => {
             className="fixed top-0 left-0 w-full z-50"
         >
             {/* Desktop Menu */}
-            <div className="hidden md:flex justify-between items-center px-6 py-7 bg-[rgba(0,0,0,0.6)] backdrop-blur-md text-white shadow-lg">
+            <div className="hidden md:flex justify-between items-center px-20 py-7 bg-[rgba(0,0,0,0.6)] backdrop-blur-md text-white shadow-lg">
             <a
                 href="#hero"
                 className="text-3xl font-raleway font-400 bg-gradient-to-br from-[#1e3a47] via-[#285e61] to-[#3b8d99] text-transparent bg-clip-text hover:scale-110 transition-transform duration-300"
@@ -78,7 +78,7 @@ const Navbar = () => {
                                 smooth="true"
                                 duration={900}
                                 offset={-80} // Adjust for fixed navbar height
-                                className="flex items-center space-x-2 text-lg font-quicksand hover:text-blue-400 transition cursor-pointer"
+                                className="flex items-center space-x-2 text-lg font-quicksand font-600 hover:text-blue-400 transition cursor-pointer"
                             >
                                 <span>{link.label}</span>
                             </Link>
@@ -91,7 +91,7 @@ const Navbar = () => {
             <div className="md:hidden">
                 {/* Sidebar Background */}
                 <motion.div
-                    className="fixed top-0 right-0 w-1/2 h-full bg-gradient-to-br from-black via-stone-900 to-orange-900 z-40"
+                    className="fixed top-0 right-0 w-1/2 h-full bg-gradient-to-br from-[#22023b] to-[#000000]"
                     variants={sidebarVariants}
                 />
 
